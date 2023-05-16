@@ -53,7 +53,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Container(
+        leading: SizedBox(
           width: 40,
           child: Row(
             children: [
