@@ -3,7 +3,7 @@ import 'dart:developer';
 // import 'package:flutter/gestures.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:go_router/go_router.dart';
 
 class EditAccountScreen extends StatefulWidget {
@@ -42,7 +42,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
       context.push('/');
     } else if (_selectedIndex == 1) {
       {
-        context.push('/time');
+        // context.push('/messages;');
       }
     } else {
       context.push('/settings');
