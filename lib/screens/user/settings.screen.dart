@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'package:fireflowapp/widgets/main.bottom.navigation.bar.dart';
+import 'package:fireflowapp/widgets/user.ready.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'dart:ffi';
 // import 'package:flutter/gestures.dart';
@@ -18,7 +20,6 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   User? user;
-  int _selectedIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -33,21 +34,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         this.user = user;
       });
     });
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    if (_selectedIndex == 0) {
-      context.push('/');
-    } else if (_selectedIndex == 1) {
-      {
-        context.push('/time');
-      }
-    } else {
-      context.push('/settings');
-    }
   }
 
   @override
@@ -257,23 +243,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inbox),
-            label: 'Messages',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
-            label: 'Settings',
-          ),
-        ],
-        onTap: _onItemTapped,
+      bottomNavigationBar: UserReady(
+        builder: (user) => MainBottomNavigationBar(user: user),
       ),
     );
   }

@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fireflowapp/widgets/main.bottom.navigation.bar.dart';
+import 'package:fireflowapp/widgets/user.ready.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:go_router/go_router.dart';
@@ -16,7 +18,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   User? user;
-  int _selectedIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -33,55 +34,14 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    if (_selectedIndex == 0) {
-      context.push('/');
-    } else if (_selectedIndex == 1) {
-      {
-        context.push('/time');
-      }
-    } else if (_selectedIndex == 2) {
-      {
-        context.push('/settings');
-      }
-    } else {
-      context.push('/login');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.purple,
-        fixedColor: Colors.purple,
-        currentIndex: 0,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inbox),
-            label: 'Messages',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: Colors.purple,
-            icon: Icon(Icons.settings_outlined),
-            label: 'Settings',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.login),
-            label: 'Login',
-          ),
-        ],
-        onTap: _onItemTapped,
+      bottomNavigationBar: UserReady(
+        builder: (user) => MainBottomNavigationBar(user: user),
       ),
       body: Center(
         child: Padding(
