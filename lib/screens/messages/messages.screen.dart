@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:go_router/go_router.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({
+class MessagesScreen extends StatefulWidget {
+  const MessagesScreen({
     super.key,
   });
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<MessagesScreen> createState() => _MessagesScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MessagesScreenState extends State<MessagesScreen> {
   User? user;
   int _selectedIndex = 0;
   @override
@@ -43,12 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
       {
         context.push('/time');
       }
-    } else if (_selectedIndex == 2) {
-      {
-        context.push('/settings');
-      }
     } else {
-      context.push('/login');
+      context.push('/settings');
     }
   }
 
@@ -59,8 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Home'),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.purple,
-        fixedColor: Colors.purple,
         currentIndex: 0,
         items: const [
           BottomNavigationBarItem(
@@ -72,13 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Messages',
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.purple,
             icon: Icon(Icons.settings_outlined),
             label: 'Settings',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.login),
-            label: 'Login',
           ),
         ],
         onTap: _onItemTapped,
