@@ -2,11 +2,9 @@ import 'dart:developer';
 import 'package:fireflowapp/widgets/main.bottom.navigation.bar.dart';
 import 'package:fireflowapp/widgets/user.ready.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'dart:ffi';
-// import 'package:flutter/gestures.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:go_router/go_router.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -20,6 +18,10 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   User? user;
+  String displayName = '';
+  FirebaseDatabase database = FirebaseDatabase.instance;
+  String get uid => FirebaseAuth.instance.currentUser!.uid;
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -51,11 +54,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Stack(
                     alignment: Alignment.center,
                     children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: 100,
-                          width: size.width - 40,
-                        ),
+                      SizedBox(
+                        height: 100,
+                        width: size.width - 40,
                       ),
                       CircleAvatar(
                         radius: 56,
@@ -89,13 +90,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  'Jane Kolin',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-              ),
+              const Padding(padding: EdgeInsets.all(10), child: Text('Name')),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
