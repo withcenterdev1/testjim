@@ -28,9 +28,11 @@ class _HomeScreenState extends State<HomeScreen> {
       } else {
         log('User is signed in!');
       }
-      setState(() {
-        this.user = user;
-      });
+      if (mounted) {
+        setState(() {
+          this.user = user;
+        });
+      }
     });
   }
 

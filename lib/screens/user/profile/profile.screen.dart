@@ -1,7 +1,8 @@
 import 'dart:developer';
+import 'package:http/http.dart' as http;
 import 'package:fireflowapp/widgets/main.bottom.navigation.bar.dart';
 import 'package:fireflowapp/widgets/user.ready.dart';
-// import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -54,12 +55,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         TextField(
                           controller: school,
                           decoration:
-                              const InputDecoration(labelText: 'Scchool Name'),
+                              const InputDecoration(labelText: 'School Name'),
                         ),
                       ],
                     );
                   }),
               ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
                 onPressed: () async {
                   try {
                     await database.ref('users/$uid').set({
@@ -71,8 +79,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     log('---> error');
                     log(e.toString());
                   }
+                  context.go('/');
                 },
-                child: const Text('Update'),
+                child: const Text('Save'),
               ),
             ],
           ),
