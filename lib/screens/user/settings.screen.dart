@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:fireflowapp/widgets/main.bottom.navigation.bar.dart';
+import 'package:fireflowapp/widgets/user.login.dart';
 import 'package:fireflowapp/widgets/user.ready.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -90,7 +91,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ],
               ),
-              const Padding(padding: EdgeInsets.all(10), child: Text('Name')),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: UserLogin(builder: (doc) {
+                  if (doc == null) {
+                    return Column(
+                      children: [
+                        Text('Oops, user profile document not found'),
+                        ElevatedButton(
+                            onPressed: () {}, child: Text('Sign Out')),
+                      ],
+                    );
+                  }
+
+                  return Center(
+                    child: Text(doc['displayName']),
+                  );
+                }),
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
